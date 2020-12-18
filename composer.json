@@ -1,16 +1,15 @@
 {
     "name": "yuk1/laravel-repository",
-    "description": ":package_description",
-    "license": "license",
+    "description": "This is the command to create a Laravel repository.",
+    "license": "MIT",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "YuK1Game",
+            "email": "develop@yuk1.jp"
         }
     ],
     "homepage": "https://github.com/yuk1/laravel-repository",
-    "keywords": ["Laravel", "LaravelRepository"],
+    "keywords": ["Laravel", "Repository"],
     "require": {
         "illuminate/support": "~7|~8"
     },
