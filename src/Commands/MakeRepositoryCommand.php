@@ -31,8 +31,7 @@ class MakeRepositoryCommand extends GeneratorCommand
     protected function getPath($name)
     {
         $nameInput = $this->getNameInput();
-        $nameBase = $this->getBaseName($name);
-        return "app/Repositories/$nameBase/$nameInput.php";
+        return "app/Repositories/$nameInput.php";
     }
 
     protected function getDefaultNamespace($rootNamespace)
