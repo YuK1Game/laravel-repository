@@ -2,8 +2,9 @@
 namespace DummyNamespace\DummyBaseName;
 
 use DummyModelNamespace;
+use App\Repositories\Repository
 
-class DummyClass extends Repository implements RepositoryInterface
+class DummyClass extends Repository
 {
     protected $model;
 
