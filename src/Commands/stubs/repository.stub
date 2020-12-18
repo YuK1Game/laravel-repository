@@ -1,0 +1,15 @@
+<?php
+namespace DummyNamespace\DummyBaseName;
+
+use App\Repositories\{ RepositoryInterface, Repository };
+use App\Models\{ DummyBaseName };
+use Carbon\Carbon;
+
+class DummyClass extends Repository implements RepositoryInterface
+{
+    protected $model;
+
+    public function __construct(DummyBaseName $model) {
+        $this->model = $model;
+    }
+}
