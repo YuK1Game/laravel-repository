@@ -1,9 +1,7 @@
 <?php
 namespace DummyNamespace\DummyBaseName;
 
-use App\Repositories\{ RepositoryInterface, Repository };
-use App\Models\{ DummyBaseName };
-use Carbon\Carbon;
+use DummyModelNamespace;
 
 class DummyClass extends Repository implements RepositoryInterface
 {

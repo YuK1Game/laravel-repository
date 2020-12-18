@@ -3,6 +3,7 @@
 namespace YuK1\LaravelRepository\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
 
 class MakeRepositoryCommand extends GeneratorCommand
 {
@@ -43,6 +44,7 @@ class MakeRepositoryCommand extends GeneratorCommand
     {
         $replaces = [
             'DummyBaseName' => $this->getBaseName($name),
+            'DummyModelNamespace' => $this->getModelNamespace($this->getBaseName($name)),
         ];
         return str_replace(array_keys($replaces), array_values($replaces), parent::buildClass($name));     
     }
@@ -54,13 +56,28 @@ class MakeRepositoryCommand extends GeneratorCommand
         throw new \Exception('Invalid repository name.');  
     }
 
+    protected function getModelsPath() {
+        return config('repository.model.path', app()->version() > 8 ? 'app/Models' : 'app');
+    }
+
+    protected function getModelsNamespace() {
+        return collect(preg_split('/\/|\\\\/', $this->getModelsPath()))
+            ->map(function($path) {
+                return Str::studly($path);
+            })->join('\\');
+    }
+
+    protected function getModelNamespace(string $model) {
+        return sprintf('%s\\%s', $this->getModelsNamespace(), Str::studly($model));
+    }
+
     public function handle() {
         $result = parent::handle();
 
         $baseName = str_replace('Repository', '', $this->getNameInput());
 
-        if ($this->option('model')) {
-            $this->call('make:model', ['name' => 'App\\Models\\' . $baseName ]);
+        if ($this->option('model') || config('repository.model.auto_create')) {
+            $this->call('make:model', ['name' => $baseName ]);
         }
         
         return $result;

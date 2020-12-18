@@ -13,12 +13,6 @@ class LaravelRepositoryServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'yuk1');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'yuk1');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
@@ -31,9 +25,8 @@ class LaravelRepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/laravel-repository.php', 'laravel-repository');
+        $this->mergeConfigFrom(__DIR__.'/../config/repository.php', 'repository');
 
-        // Register the service the package provides.
         $this->app->singleton('laravel-repository', function ($app) {
             return new LaravelRepository;
         });
@@ -56,27 +49,10 @@ class LaravelRepositoryServiceProvider extends ServiceProvider
      */
     protected function bootForConsole(): void
     {
-        // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/laravel-repository.php' => config_path('laravel-repository.php'),
+            __DIR__.'/../config/repository.php' => config_path('repository.php'),
         ], 'laravel-repository.config');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/yuk1'),
-        ], 'laravel-repository.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/yuk1'),
-        ], 'laravel-repository.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/yuk1'),
-        ], 'laravel-repository.views');*/
-
-        // Registering package commands.
+        
         $this->commands([
             Commands\MakeRepositoryCommand::class,
         ]);
